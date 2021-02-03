@@ -14,9 +14,13 @@ Resources:
       CodeUri: src/
       Handler: app.lambdaHandler
       Runtime: nodejs12.x
+      Environment:
+        Variables:
+          S3_BUCKET: !Ref mailBucket
   logGroup:
     Type: AWS::Logs::LogGroup
     Properties:
       LogGroupName: !Sub /aws/lambda/${lambda}
       RetentionInDays: 14
-
+  mailBucket:
+    Type: AWS::S3::Bucket
