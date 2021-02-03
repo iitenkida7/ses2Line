@@ -8,10 +8,15 @@ Globals:
     Timeout: 3
 
 Resources:
-  ses2Line:
+  lambda:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: src/
       Handler: app.lambdaHandler
       Runtime: nodejs12.x
+  logGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${lambda}
+      RetentionInDays: 14
 
